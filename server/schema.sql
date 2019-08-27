@@ -16,7 +16,7 @@ CREATE TABLE `Listings` (
   `id` INTEGER AUTO_INCREMENT,
   `Host_FirstName` VARCHAR(100) ,
   `Host_LastName` VARCHAR(100) ,
-  `Image_Url` VARCHAR(1000),
+  `Image_Url` VARCHAR(100),
   PRIMARY KEY (`id`)
 );
 
@@ -33,14 +33,14 @@ CREATE TABLE `Reviews` (
   `Traveler_LastName` VARCHAR(100),
   `Date` DATE,
   `Image_Url` VARCHAR(100),
-  `Review` VARCHAR(250),
+  `Review` VARCHAR(500),
   `Rating_Accuracy` INTEGER,
   `Rating_Communication` INTEGER,
   `Rating_Cleanliness` INTEGER,
   `Rating_Location` INTEGER,
   `Rating_CheckIn` INTEGER,
   `Rating_Value` INTEGER,
-  -- `Listing_Id` INTEGER,
+  `Listing_Id` INTEGER,
   PRIMARY KEY (`id`)
 );
 
@@ -54,8 +54,8 @@ DROP TABLE IF EXISTS `Responses`;
 CREATE TABLE `Responses` (
   `id` INTEGER AUTO_INCREMENT,
   `Date` DATE,
-  `Response` VARCHAR(1000),
-  -- `Review_Id` INTEGER,
+  `Response` VARCHAR(500),
+  `Review_Id` INTEGER,
   PRIMARY KEY (`id`)
 );
 
