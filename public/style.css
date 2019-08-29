@@ -1,5 +1,18 @@
-.img {
-  border-radius:50%;
-  width: 42px;
-  height: 42px;
+.star-icon {
+  color: lightgrey;
+  position: relative;
+}
+.star-icon.full:before {
+  color: lightseagreen;
+  content: '\2605';
+  position: absolute;
+  left: 0;
+}
+.star-icon.half:before {
+  color:lightseagreen;
+  content: '\2605';
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
 }

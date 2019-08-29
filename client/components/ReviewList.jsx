@@ -11,6 +11,4 @@ const ReviewList = (props) => {
   );
 };
 
-
-
 export default ReviewList;

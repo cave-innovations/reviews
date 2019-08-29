@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import $ from 'jquery';
 import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
+import Ratings from './Ratings.jsx';
+import ReviewSearch from './ReviewSearch.jsx';
+import OverallRating from './OverallRating.jsx'
 
 const Title = styled.h1 `
   font-size: 1.5em;
@@ -14,6 +17,13 @@ const Wrapper = styled.section `
   background: papayawhip;
 `;
 
+const Hr = styled.hr `
+  background-color: #eee;
+  border: 0 none;
+  color: #eee;
+  height: 1px;
+`
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,36 +31,92 @@ class App extends React.Component {
       listingId: 3,
       listing: [],
       reviews: [],
-      responses: []
+      responses: [],
+      ratings: [],
+      searchedTerm: '',
     };
+
+    this.handleSearch = this.handleSearch.bind(this)
+    this.filterReviewsBySearchTerm = this.filterReviewsBySearchTerm.bind(this)
   }
 
   componentDidMount() {
     axios.all([
-      axios.get('/api/listings', {params: {listingId: this.state.listingId}}),
-      axios.get('/api/reviews', {params: {listingId: this.state.listingId}})
+      axios.get(`/api/listing`, {params: {listingId: this.state.listingId}}),
+      axios.get(`/api/review`, {params: {listingId: this.state.listingId}})
     ])
       .then(axios.spread( (listing, reviews) => {
         // Both requests are now complete
         this.setState({
           listing: listing.data,
-          reviews: reviews.data
+          reviews: reviews.data,
+          ratings: reviews.data
         });
       }))
       .catch(error => console.log(error));
   }
 
-  render() {
-    const {listingId, listing, reviews, responses} = this.state;
-    return (
-      <div>
-        <Wrapper>
-          <Title>Hello World</Title>
-        </Wrapper>
-        {reviews.length && <ReviewList reviews={reviews}/>}
-      </div>
+  handleSearch(searchedTerm) {
+    this.setState({searchedTerm})
+  }
 
-    );
+  filterReviewsBySearchTerm() {
+    return this.state.searchedTerm? this.state.reviews.filter(review => review.Review.includes(this.state.searchedTerm)):this.state.reviews
+  }
+
+  render() {
+    // const {listingId, listing, reviews, responses} = this.state;
+    const reviews = this.filterReviewsBySearchTerm()
+
+    if(reviews.length === this.state.ratings.length) {
+      return(
+        <div>
+          <p>
+            <b>{this.state.ratings.length} Reviews</b>
+            {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
+            <ReviewSearch handleSearch={this.handleSearch}/>
+          </p>
+          <p>
+            {this.state.ratings.length && <Ratings ratings={this.state.ratings}/>}
+          </p>
+          {reviews.length && <ReviewList reviews={reviews}/>}
+        </div>
+      )
+    }
+    else if(reviews.length>0){
+      return (
+        <div>
+          <p>
+            <b>{this.state.ratings.length} Reviews</b>
+            {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
+            <ReviewSearch handleSearch={this.handleSearch}/>
+          </p>
+          <Hr />
+          <p>
+            {reviews.length} guests have mentioned "<b>{this.state.searchedTerm}</b>"
+          </p>
+          {reviews.length && <ReviewList reviews={reviews}/>}
+        </div>
+      );
+    }
+
+    else if(reviews.length===0){
+      return (
+        <div>
+          <p>
+            <b>{this.state.ratings.length} Reviews</b>
+            {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
+            <ReviewSearch handleSearch={this.handleSearch}/>
+          </p>
+          <Hr/>
+          <p>
+            None of our guests have mentioned "<b>{this.state.searchedTerm}</b>"
+          </p>
+          <Hr/>
+        </div>
+      );
+    }
+
   }
 }
 
