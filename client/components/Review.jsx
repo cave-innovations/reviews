@@ -1,16 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 const Image = styled.img `
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
+  border-radius:50%
 `;
 
+const Hr = styled.hr `
+background-color: #eee;
+border: 0 none;
+color: #eee;
+height: 1px;
+`
+
 const Review = (props) => (
-  <li>
+  <div>
     <section>
       <p>
-        <img src={props.review.Image_Url} className="img"></img>
+        <Image src={props.review.Image_Url}/>
         <b>{props.review.Traveler_FirstName}</b>
       </p>
       <p>
@@ -20,11 +29,8 @@ const Review = (props) => (
     <p>
       {props.review.Review}
     </p>
-    {/* <Image>
-      <img src={props.review.Image_Url}></img>
-    </Image> */}
-    {/* <img src={props.review.Image_Url}></img> */}
-  </li>
+    <Hr />
+  </div>
 );
 
 export default Review;

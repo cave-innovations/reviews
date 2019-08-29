@@ -6,7 +6,7 @@ for (var i = 0; i < 100; i++) {
   const listing = {};
   listing.host_firstName = faker.name.firstName();
   listing.host_lastName = faker.name.lastName();
-  listing.image_url = faker.image.imageUrl();
+  listing.image_url = faker.random.image();
   listings.push(listing);
 }
 
@@ -18,14 +18,14 @@ for (var i = 1; i <= 100; i++) {
     review.traveler_firstName = faker.name.firstName();
     review.traveler_lastName = faker.name.lastName();
     review.date = faker.date.past();
-    review.imageUrl = faker.image.imageUrl();
+    review.imageUrl = faker.random.image();
     review.review = faker.lorem.paragraph();
-    review.rating_accuracy = faker.random.number({min: 0, max: 5});
-    review.rating_communication = faker.random.number({min: 0, max: 5});
-    review.rating_cleanliness = faker.random.number({min: 0, max: 5});
-    review.rating_location = faker.random.number({min: 0, max: 5});
-    review.rating_checkin = faker.random.number({min: 0, max: 5});
-    review.rating_value = faker.random.number({min: 0, max: 5});
+    review.rating_accuracy = faker.random.number({min: 1, max: 5});
+    review.rating_communication = faker.random.number({min: 1, max: 5});
+    review.rating_cleanliness = faker.random.number({min: 1, max: 5});
+    review.rating_location = faker.random.number({min: 1, max: 5});
+    review.rating_checkin = faker.random.number({min: 1, max: 5});
+    review.rating_value = faker.random.number({min: 1, max: 5});
     review.listing_id = i;
     reviews.push(review);
   }
