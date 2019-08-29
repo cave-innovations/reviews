@@ -23,6 +23,10 @@ const Hr = styled.hr `
   color: #eee;
   height: 1px;
 `
+const Header = styled.div `
+  right: 100px;
+  left: 100;
+`
 
 class App extends React.Component {
   constructor(props) {
@@ -71,15 +75,16 @@ class App extends React.Component {
     if(reviews.length === this.state.ratings.length) {
       return(
         <div>
-          <p>
-            <b>{this.state.ratings.length} Reviews</b>
-            {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
+          <Header>
+            <h2><b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}</h2>
             <ReviewSearch handleSearch={this.handleSearch}/>
-          </p>
+          </Header>
           <p>
             {this.state.ratings.length && <Ratings ratings={this.state.ratings}/>}
           </p>
+          <div>
           {reviews.length && <ReviewList reviews={reviews}/>}
+          </div>
         </div>
       )
     }

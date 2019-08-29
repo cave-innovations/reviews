@@ -2,7 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Input = styled.input `
-  border: 1px solid lightseagreen
+  border: 1px solid lightseagreen;
+`
+
+const Button = styled.button `
+
 `
 
 class ReviewSearch extends React.Component {
@@ -28,8 +32,8 @@ class ReviewSearch extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <Input type="text" placeholder=" 🔍 Search Reviews" value={this.state.value} onChange={this.handleChange}></Input>
-        <button type="submit" value="Submit">Search</button>
+        <Input type="search" placeholder=" 🔍 Search Reviews" value={this.state.value} onChange={this.handleChange}></Input>
+        <Button type="submit" value="Submit">Search</Button>
       </form>
     )
   }
