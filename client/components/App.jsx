@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import $ from 'jquery';
 import axios from 'axios';
+import moment from 'moment'
 import ReviewList from './ReviewList.jsx';
 import Ratings from './Ratings.jsx';
 import ReviewSearch from './ReviewSearch.jsx';
@@ -23,9 +24,39 @@ const Hr = styled.hr `
   color: #eee;
   height: 1px;
 `
-const Header = styled.div `
-  right: 100px;
-  left: 100;
+
+const Div1 = styled.div `
+  display:inline-block;
+  padding-right: 465px;
+`
+const Div2 = styled.div `
+  display:inline-block;
+`
+
+const U = styled.span `
+  color: lightseagreen;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline
+  }
+`
+
+const P1 = styled.p `
+  float:left
+`
+
+const P2 = styled.p `
+  float:right
+`
+
+const PageNumber = styled.span `
+  margin-right: .3em;
+  font-size: 14px
+  color: lightseagreen;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `
 
 class App extends React.Component {
@@ -38,10 +69,14 @@ class App extends React.Component {
       responses: [],
       ratings: [],
       searchedTerm: '',
+      currentPage: 1,
+      reviewsPerPage: 7,
     };
 
     this.handleSearch = this.handleSearch.bind(this)
     this.filterReviewsBySearchTerm = this.filterReviewsBySearchTerm.bind(this)
+    this.backToAllReviews = this.backToAllReviews.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -68,22 +103,54 @@ class App extends React.Component {
     return this.state.searchedTerm? this.state.reviews.filter(review => review.Review.includes(this.state.searchedTerm)):this.state.reviews
   }
 
+  backToAllReviews(event) {
+    event.preventDefault()
+    this.setState({searchedTerm:''})
+
+  }
+
+  handleClick(event) {
+    this.setState({currentPage: Number(event.target.id)})
+  }
+
   render() {
     // const {listingId, listing, reviews, responses} = this.state;
+    const indexOfLastReview = this.state.currentPage * this.state.reviewsPerPage
+    const indexOfFirstReview = indexOfLastReview - this.state.reviewsPerPage
     const reviews = this.filterReviewsBySearchTerm()
+    const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview)
+
+    const pageNumbers = []
+    for(let i = 1; i <= Math.ceil(reviews.length / this.state.reviewsPerPage); i++) {
+      pageNumbers.push(i)
+    }
+
+    const renderPageNumber = pageNumbers.map(number => {
+      return (
+        <PageNumber key={number} id={number} onClick={this.handleClick}>
+          {number}
+        </PageNumber>
+      )
+    })
+
 
     if(reviews.length === this.state.ratings.length) {
       return(
         <div>
-          <Header>
-            <h2><b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}</h2>
-            <ReviewSearch handleSearch={this.handleSearch}/>
-          </Header>
-          <p>
-            {this.state.ratings.length && <Ratings ratings={this.state.ratings}/>}
-          </p>
+          <Hr/>
           <div>
-          {reviews.length && <ReviewList reviews={reviews}/>}
+            <Div1><h2><b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}</h2></Div1>
+            <Div2><ReviewSearch handleSearch={this.handleSearch}/></Div2>
+          </div>
+          <Hr/>
+          <div>
+            {this.state.ratings.length && <Ratings ratings={this.state.ratings}/>}
+          </div>
+          <div>
+          {reviews.length && <ReviewList reviews={currentReviews}/>}
+          </div>
+          <div>
+            {renderPageNumber}
           </div>
         </div>
       )
@@ -91,16 +158,26 @@ class App extends React.Component {
     else if(reviews.length>0){
       return (
         <div>
-          <p>
-            <b>{this.state.ratings.length} Reviews</b>
-            {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
-            <ReviewSearch handleSearch={this.handleSearch}/>
-          </p>
-          <Hr />
-          <p>
-            {reviews.length} guests have mentioned "<b>{this.state.searchedTerm}</b>"
-          </p>
+          <Hr/>
+          <div>
+            <Div1>
+              <b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
+            </Div1>
+            <Div2><ReviewSearch handleSearch={this.handleSearch}/></Div2>
+          </div>
+          <Hr/>
+          <div>
+            <div>
+              <P1>{reviews.length} guests have mentioned "<b>{this.state.searchedTerm}</b>"
+              </P1>
+              <P2>
+                {this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}
+              </P2>
+            </div>
+          </div>
+          <div>
           {reviews.length && <ReviewList reviews={reviews}/>}
+          </div>
         </div>
       );
     }
@@ -108,16 +185,21 @@ class App extends React.Component {
     else if(reviews.length===0){
       return (
         <div>
-          <p>
+          <Hr/>
+          <div>
+          <Div1>
             <b>{this.state.ratings.length} Reviews</b>
             {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
-            <ReviewSearch handleSearch={this.handleSearch}/>
-          </p>
+          </Div1>
+          <Div2><ReviewSearch handleSearch={this.handleSearch}/></Div2>
+          </div>
           <Hr/>
-          <p>
-            None of our guests have mentioned "<b>{this.state.searchedTerm}</b>"
-          </p>
-          <Hr/>
+          <div>
+            <P1>None of our guests have mentioned "<b>{this.state.searchedTerm}</b>"</P1>
+            <P2>
+              {this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}
+            </P2>
+          </div>
         </div>
       );
     }

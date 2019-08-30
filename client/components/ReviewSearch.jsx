@@ -3,6 +3,9 @@ import styled from 'styled-components'
 
 const Input = styled.input `
   border: 1px solid lightseagreen;
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
 `
 
 const Button = styled.button `
@@ -31,10 +34,11 @@ class ReviewSearch extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input type="search" placeholder=" 🔍 Search Reviews" value={this.state.value} onChange={this.handleChange}></Input>
-        <Button type="submit" value="Submit">Search</Button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <Input type="search" placeholder=" 🔍 Search Reviews" value={this.state.value} onChange={this.handleChange}></Input>
+        </form>
+      </div>
     )
   }
 }

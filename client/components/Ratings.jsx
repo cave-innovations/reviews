@@ -13,7 +13,11 @@ const Rating1 = styled.div `
 `
 
 const Rating2 = styled.div `
-  float:right
+  float: right;
+`
+const Block = styled.div `
+  display: block;
+  clear: both;
 `
 
 const Ratings = (props) => {
@@ -25,24 +29,22 @@ const Ratings = (props) => {
   const communication = props.ratings.map(a => a.Rating_Communication).reduce((a,b) => a+b)/props.ratings.length
   const location = props.ratings.map(a => a.Rating_Location).reduce((a,b) => a+b)/props.ratings.length
   const value = props.ratings.map(a => a.Rating_Value).reduce((a,b) => a+b)/props.ratings.length
-  ratings1.push({accuracy}, {checkin}, {cleanliness})
-  ratings2.push({communication}, {location}, {value})
+  ratings1.push({accuracy}, {communication}, {cleanliness})
+  ratings2.push({location}, {checkin}, {value})
 
   return (
-    <ul>
-      <Hr/>
+    <Block>
       <Rating1>
         {ratings1.map((rating, i) =>
         <Rating key={i} rating={rating}/>
         )}
       </Rating1>
       <Rating2>
-      {ratings1.map((rating, i) =>
+      {ratings2.map((rating, i) =>
         <Rating key={i} rating={rating}/>
         )}
       </Rating2>
-      {/* <Hr/> */}
-    </ul>
+    </Block>
   )
 }
 
