@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Input = styled.input `
-  border: 1px solid lightseagreen;
+  border: .5px solid ;
+  outline-color: lightseagreen;
   width: 150px;
   height: 30px;
   border-radius: 5px;
