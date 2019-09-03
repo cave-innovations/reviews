@@ -13,7 +13,7 @@ app.use(express.static('public'));
 
 // listings
 app.get('/api/listings', (req, res) => {
-  mysql = `select * from listings`;
+  mysql = 'select * from listings';
   db.query(mysql, (err, data) => {
     if (err) {
       res.send(err);
@@ -25,7 +25,7 @@ app.get('/api/listings', (req, res) => {
 
 // listing
 app.get('/api/listing', (req, res) => {
-  mysql = `select * from listings where id = ${Number(req.query.listingId)? Number(req.query.listingId): Number(req.body.listingId) }`;
+  mysql = `select * from listings where id = ${Number(req.query.listingId) ? Number(req.query.listingId) : Number(req.body.listingId) }`;
   db.query(mysql, (err, data) => {
     if (err) {
       res.send(err);
@@ -38,7 +38,7 @@ app.get('/api/listing', (req, res) => {
 
 // reviews
 app.get('/api/reviews', (req, res) => {
-  mysql = `select * from reviews`;
+  mysql = 'select * from reviews';
   db.query(mysql, (err, data) => {
     if (err) {
       res.send(err);
@@ -51,7 +51,7 @@ app.get('/api/reviews', (req, res) => {
 
 // review
 app.get('/api/review', (req, res) => {
-  mysql = `select * from reviews where listing_id =${Number(req.query.listingId)? Number(req.query.listingId): Number(req.body.listingId)}`;
+  mysql = `select * from reviews where listing_id =${Number(req.query.listingId) ? Number(req.query.listingId) : Number(req.body.listingId)}`;
   // mysql = `select * from reviews inner join responses on reviews.id=responses.review_id where reviews.id=1`
   db.query(mysql, (err, data) => {
     if (err) {
@@ -65,7 +65,7 @@ app.get('/api/review', (req, res) => {
 
 // responses
 app.get('/api/responses', (req, res) => {
-  mysql = `select * from responses`;
+  mysql = 'select * from responses';
   db.query(mysql, (err, data) => {
     if (err) {
       res.send(err);

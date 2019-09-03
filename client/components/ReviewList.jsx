@@ -1,11 +1,11 @@
 import React from 'react';
 import Review from './Review.jsx';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Block = styled.div `
   display: block;
   clear: both;
-`
+`;
 
 const ReviewList = (props) => {
   return (
