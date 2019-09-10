@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
@@ -105,8 +105,8 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.all([
-      axios.get('/api/listing', {params: {listingId: this.state.listingId}}),
-      axios.get('/api/review', {params: {listingId: this.state.listingId}})
+      axios.get('http://ec2-54-193-1-143.us-west-1.compute.amazonaws.com:3306/api/listing', {params: {listingId: this.state.listingId}}),
+      axios.get('http://ec2-54-193-1-143.us-west-1.compute.amazonaws.com:3306/api/review', {params: {listingId: this.state.listingId}})
     ])
       .then(axios.spread( (listing, reviews) => {
         // Both requests are now complete

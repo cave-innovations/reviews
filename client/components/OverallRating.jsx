@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 const Star1 = styled.span `
   color: rgb(0, 132, 137)

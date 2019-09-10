@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  reviews:
+    image: ssoro013/reviews_reviews:reviews2
+    depends_on:
+      - 'database'
+    ports:
+      - '3306:3306'
+
+
+  database:
+    image: mysql:5.7.27
+    environment:
+      MYSQL_DATABASE: reviews
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: '12345'
+    volumes:
+      - ./server/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+

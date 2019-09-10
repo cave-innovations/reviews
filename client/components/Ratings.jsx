@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import Rating from './Rating.jsx';
 
 const Hr = styled.hr `
