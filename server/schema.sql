@@ -9,10 +9,15 @@
 -- Table 'Listings'
 --
 -- ---
+DROP DATABASE IF EXISTS reviews;
 
-DROP TABLE IF EXISTS `Listings`;
+CREATE DATABASE reviews;
 
-CREATE TABLE `Listings` (
+USE reviews;
+
+DROP TABLE IF EXISTS `listings`;
+
+CREATE TABLE `listings` (
   `id` INTEGER AUTO_INCREMENT,
   `Host_FirstName` VARCHAR(100) ,
   `Host_LastName` VARCHAR(100) ,
@@ -25,9 +30,9 @@ CREATE TABLE `Listings` (
 --
 -- ---
 
-DROP TABLE IF EXISTS `Reviews`;
+DROP TABLE IF EXISTS `reviews`;
 
-CREATE TABLE `Reviews` (
+CREATE TABLE `reviews` (
   `id` INTEGER AUTO_INCREMENT,
   `Traveler_FirstName` VARCHAR(100),
   `Traveler_LastName` VARCHAR(100),
@@ -49,9 +54,9 @@ CREATE TABLE `Reviews` (
 --
 -- ---
 
-DROP TABLE IF EXISTS `Responses`;
+DROP TABLE IF EXISTS `responses`;
 
-CREATE TABLE `Responses` (
+CREATE TABLE `responses` (
   `id` INTEGER AUTO_INCREMENT,
   `Date` DATE,
   `Response` VARCHAR(500),
@@ -63,8 +68,8 @@ CREATE TABLE `Responses` (
 -- Foreign Keys
 -- ---
 
-ALTER TABLE `Reviews` ADD FOREIGN KEY (Listing_Id) REFERENCES `Listings` (`id`);
-ALTER TABLE `Responses` ADD FOREIGN KEY (Review_Id) REFERENCES `Reviews` (`id`);
+ALTER TABLE `reviews` ADD FOREIGN KEY (Listing_Id) REFERENCES `listings` (`id`);
+ALTER TABLE `responses` ADD FOREIGN KEY (Review_Id) REFERENCES `reviews` (`id`);
 
 -- ---
 -- Table Properties

@@ -32,16 +32,16 @@ faker.reviews.forEach(review => populateReview(review));
 
 
 //populating the responses table
-var populateResponse = function(response) {
-  const responseSql = `insert into responses (date, response, review_id) values(
-  '${response.date.toJSON().slice(0, 10).replace('T', ' ')}', '${response.response}', ${response.reviewId})`;
-  db.query(responseSql, (err, rows, fields) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(`Response to the review ${response.review_id} posted!`);
-    }
-  });
-};
+// var populateResponse = function(response) {
+//   const responseSql = `insert into responses (date, response, review_id) values(
+//   '${response.date.toJSON().slice(0, 10).replace('T', ' ')}', '${response.response}', ${response.reviewId})`;
+//   db.query(responseSql, (err, rows, fields) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(`Response to the review ${response.review_id} posted!`);
+//     }
+//   });
+// };
 
-faker.responses.forEach(response => populateResponse(response));
+// faker.responses.forEach(response => populateResponse(response));

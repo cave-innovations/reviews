@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 
 const Div1 = styled.div `
