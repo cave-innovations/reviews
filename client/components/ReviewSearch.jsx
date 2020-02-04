@@ -23,6 +23,7 @@ class ReviewSearch extends React.Component {
     this.setState({value: event.target.value});
   }
 
+  //functio to
   handleSubmit(event) {
     event.preventDefault();
     this.props.handleSearch(this.state.value);

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
 import ReviewList from './ReviewList.jsx';
@@ -8,7 +7,7 @@ import Ratings from './Ratings.jsx';
 import ReviewSearch from './ReviewSearch.jsx';
 import OverallRating from './OverallRating.jsx';
 
-//styling using styled components
+//styling using styled-components
 const Title = styled.h1 `
   font-size: 1.5em;
   text-align: center;
@@ -108,8 +107,9 @@ class App extends React.Component {
       axios.get('api/listing', {params: {listingId: this.state.listingId}}),
       axios.get('api/review', {params: {listingId: this.state.listingId}})
     ])
+    //both requests are now complete: spread is used to hangle multiple concurrent requests
       .then(axios.spread((listing, reviews) => {
-        // both requests are now complete
+        console.log(reviews)
         this.setState({
           listing: listing.data,
           reviews: reviews.data,
@@ -129,15 +129,15 @@ class App extends React.Component {
     return this.state.searchedTerm ? this.state.reviews.filter(review => review.Review.includes(this.state.searchedTerm)) : this.state.reviews;
   }
 
-  //function to return to all reviews: essentially resetting search termed to empy string
+  //function to return to all reviews: essentially resetting searched term to empy string
   backToAllReviews(event) {
     event.preventDefault();
     this.setState({searchedTerm: ''});
-
   }
 
   //function to implement pagination, helps to move across different pages
   handleClick(event) {
+    window.scrollTo(0, 0);//scrolls to the top of page
     this.setState({currentPage: Number(event.target.id)});
   }
 
@@ -147,7 +147,7 @@ class App extends React.Component {
     const reviews = this.filterReviewsBySearchTerm();
     const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
-    //array to store number of total pages based on number of reviews and reviews per pages
+    //array to store the number of total pages based on number of reviews and reviews per pages
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(reviews.length / this.state.reviewsPerPage); i++) {
       pageNumbers.push(i);
@@ -194,6 +194,7 @@ class App extends React.Component {
           </div>
         </div>
       );
+
     //2nd case: searched term found in some of the reviews
     } else if(reviews.length > 0) {
       return (

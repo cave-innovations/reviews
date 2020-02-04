@@ -27,7 +27,6 @@ const Rating = (props) => {
       <p>
         <Key>{_.capitalize(key)}</Key>
         <Stars><Star1>★</Star1><Star2>★</Star2><Star2>★</Star2><Star2>★</Star2><Star2>★</Star2></Stars>
-        {/* <span className="star-icon half">★</span> */}
       </p>
     );
   } else if (Math.floor(props.rating[key[0]]) === 2) {
