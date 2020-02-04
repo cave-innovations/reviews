@@ -1,5 +1,5 @@
 import React from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
@@ -8,6 +8,7 @@ import Ratings from './Ratings.jsx';
 import ReviewSearch from './ReviewSearch.jsx';
 import OverallRating from './OverallRating.jsx';
 
+//styling
 const Title = styled.h1 `
   font-size: 1.5em;
   text-align: center;
@@ -81,8 +82,6 @@ const CurrentPage = styled.span `
 
 `;
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -104,12 +103,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    //get requests: routes /listing and /review are used to get listing and listing reviews data respectively
     axios.all([
-      axios.get('http://ec2-54-193-1-143.us-west-1.compute.amazonaws.com:3306/api/listing', {params: {listingId: this.state.listingId}}),
-      axios.get('http://ec2-54-193-1-143.us-west-1.compute.amazonaws.com:3306/api/review', {params: {listingId: this.state.listingId}})
+      axios.get('api/listing', {params: {listingId: this.state.listingId}}),
+      axios.get('api/review', {params: {listingId: this.state.listingId}})
     ])
-      .then(axios.spread( (listing, reviews) => {
-        // Both requests are now complete
+      .then(axios.spread((listing, reviews) => {
+        // both requests are now complete
         this.setState({
           listing: listing.data,
           reviews: reviews.data,
@@ -119,20 +119,24 @@ class App extends React.Component {
       .catch(error => console.log(error));
   }
 
+  //function to search for key word in reviews
   handleSearch(searchedTerm) {
     this.setState({searchedTerm});
   }
 
+  //function to filter the reviews on the searched term
   filterReviewsBySearchTerm() {
     return this.state.searchedTerm ? this.state.reviews.filter(review => review.Review.includes(this.state.searchedTerm)) : this.state.reviews;
   }
 
+  //function to return
   backToAllReviews(event) {
     event.preventDefault();
     this.setState({searchedTerm: ''});
 
   }
 
+  //function to implement pagination, helps to move across different pages
   handleClick(event) {
     this.setState({currentPage: Number(event.target.id)});
   }
@@ -143,11 +147,13 @@ class App extends React.Component {
     const reviews = this.filterReviewsBySearchTerm();
     const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
+    //array to store number of total pages based on number of reviews and reviews per pages
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(reviews.length / this.state.reviewsPerPage); i++) {
       pageNumbers.push(i);
     }
 
+    //page number component: current page has a slight different styling than other pages to note the difference
     const renderPageNumber = pageNumbers.map(number => {
       return (
         number === this.state.currentPage ?
@@ -159,9 +165,10 @@ class App extends React.Component {
           </Page>
       );
     });
+    //conditional rendering:
 
-
-    if (reviews.length === this.state.ratings.length) {
+    //1st case: no searched term
+    if(reviews.length === this.state.ratings.length) {
       return (
         <div>
           <Hr/>
@@ -187,7 +194,8 @@ class App extends React.Component {
           </div>
         </div>
       );
-    } else if (reviews.length > 0) {
+    //2nd case: searched term found in some of the reviews
+    } else if(reviews.length > 0) {
       return (
         <div>
           <Hr/>
@@ -220,7 +228,9 @@ class App extends React.Component {
           </div>
         </div>
       );
-    } else if (reviews.length === 0) {
+
+    //3rd: search term not found in any of the reviews
+    } else if(reviews.length === 0) {
       return (
         <div>
           <Hr/>
@@ -247,7 +257,6 @@ class App extends React.Component {
         </div>
       );
     }
-
   }
 }
 
