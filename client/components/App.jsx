@@ -8,7 +8,7 @@ import Ratings from './Ratings.jsx';
 import ReviewSearch from './ReviewSearch.jsx';
 import OverallRating from './OverallRating.jsx';
 
-//styling
+//styling using styled components
 const Title = styled.h1 `
   font-size: 1.5em;
   text-align: center;
@@ -129,7 +129,7 @@ class App extends React.Component {
     return this.state.searchedTerm ? this.state.reviews.filter(review => review.Review.includes(this.state.searchedTerm)) : this.state.reviews;
   }
 
-  //function to return
+  //function to return to all reviews: essentially resetting search termed to empy string
   backToAllReviews(event) {
     event.preventDefault();
     this.setState({searchedTerm: ''});
