@@ -94,10 +94,10 @@ class App extends React.Component {
 			reviewsPerPage: 7,
 		};
 
-	this.handleSearch = this.handleSearch.bind(this);
-    this.filterReviewsBySearchTerm = this.filterReviewsBySearchTerm.bind(this);
-    this.backToAllReviews = this.backToAllReviews.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
+    	this.filterReviewsBySearchTerm = this.filterReviewsBySearchTerm.bind(this);
+    	this.backToAllReviews = this.backToAllReviews.bind(this);
+    	this.handleClick = this.handleClick.bind(this);
 	}
 
 	componentDidMount() {
@@ -127,7 +127,7 @@ class App extends React.Component {
   	//function to filter the reviews on the searched term
   	filterReviewsBySearchTerm() {
     	return this.state.searchedTerm ? this.state.reviews.filter(review => review.Review.includes(this.state.searchedTerm)) : this.state.reviews;
-  }
+  	}
 
   	//function to return to all reviews: essentially resetting searched term to empy string
   	backToAllReviews(event) {
