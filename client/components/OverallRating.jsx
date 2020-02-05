@@ -2,13 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Star1 = styled.span `
-  color: rgb(0, 132, 137)
+  color: rgb(0, 132, 137);
 `;
 const Star2 = styled.span `
-  color: lightgrey
-`;
-
-const StarHalf = styled.span `
+  color: lightgrey;
 `;
 
 const OverallRating = (props) => {
@@ -26,7 +23,6 @@ const OverallRating = (props) => {
     return (
       <span>
         <Star1>★</Star1><Star2>★</Star2><Star2>★</Star2><Star2>★</Star2><Star2>★</Star2>
-        {/* <span className="star-icon half">★</span> */}
       </span>
     );
   } else if (averageRating === 2) {
