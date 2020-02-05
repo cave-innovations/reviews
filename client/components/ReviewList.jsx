@@ -9,9 +9,9 @@ const Block = styled.div `
 
 const ReviewList = (props) => {
   return (
-    <Block>
+  	<Block>
 			{props.reviews.map(review =>
-				<Review key={review.id} review={review}/>
+			<Review key={review.id} review={review}/>
 			)}
 		</Block>
 	);
