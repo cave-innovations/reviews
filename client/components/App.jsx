@@ -78,7 +78,6 @@ const CurrentPage = styled.span `
     cursor: pointer;
     text-decoration: underline;
   };
-
 `;
 
 class App extends React.Component {
@@ -109,7 +108,6 @@ class App extends React.Component {
     ])
     //both requests are now complete: spread is used to hangle multiple concurrent requests
       .then(axios.spread((listing, reviews) => {
-        console.log(reviews)
         this.setState({
           listing: listing.data,
           reviews: reviews.data,
