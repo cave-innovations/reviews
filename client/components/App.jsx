@@ -107,10 +107,10 @@ class App extends React.Component {
 			axios.get('api/review', {params: {listingId: this.state.listingId}})
 		])
 		//both requests are now complete: spread is used to hangle multiple concurrent requests
-    	.then(axios.spread((listing, reviews) => {
-    		this.setState({
-        		listing: listing.data,
-        		reviews: reviews.data,
+    .then(axios.spread((listing, reviews) => {
+    	this.setState({
+        listing: listing.data,
+        reviews: reviews.data,
 				ratings: reviews.data
 			});
 		}))
@@ -119,7 +119,7 @@ class App extends React.Component {
 		);
 	}
 
-  	//function to search for key word in reviews
+  //function to search for key word in reviews
 	handleSearch(searchedTerm) {
 		this.setState({searchedTerm});
 	}
