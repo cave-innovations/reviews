@@ -165,24 +165,24 @@ class App extends React.Component {
 			  </Page>
 			);
 		});
-    	//conditional rendering:
+    //conditional rendering:
 
 		//1st case: no searched term
 		if(reviews.length === this.state.ratings.length) {
 			return (
 				<div>
-          	<Hr/>
-          		<Block>
-            	<Div1>
-              		<h2><b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}</h2>
-            	</Div1>
-            	<Div2>
-              	<h2>
-                	<ReviewSearch handleSearch={this.handleSearch}/>
-              	</h2>
-            	</Div2>
-          		</Block>
-          	<Hr/>
+          <Hr/>
+          	<Block>
+            <Div1>
+              	<h2><b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}</h2>
+            </Div1>
+            <Div2>
+              <h2>
+                <ReviewSearch handleSearch={this.handleSearch}/>
+              </h2>
+            </Div2>
+          	</Block>
+        	<Hr/>
 					<div>
 						{this.state.ratings.length && <Ratings ratings={this.state.ratings}/>}
 					</div>
@@ -248,8 +248,8 @@ class App extends React.Component {
             		</P2>
           		</div>
         		</div>
-      	);
-    	}
+      );
+    }
   }
 }
 
