@@ -57,13 +57,13 @@ class Review extends React.Component {
         return (
             <div>
                 <div>
-                <Div1>
-                <Image src={this.props.review.Image_Url}/>
-                </Div1>
-                <Div2>
-                    <div><b>{this.props.review.Traveler_FirstName}</b></div>
-                    <div>{moment(this.props.review.Date.slice(0, 10).replace(/-/g, '')).format('MMMM YY')}</div>
-                </Div2>
+                    <Div1>
+                        <Image src={this.props.review.Image_Url}/>
+                    </Div1>
+                    <Div2>
+                        <div><b>{this.props.review.Traveler_FirstName}</b></div>
+                        <div>{moment(this.props.review.Date.slice(0, 10).replace(/-/g, '')).format('MMMM YY')}</div>
+                    </Div2>
                 </div>
                 <p>
                     {this.showMore()}
