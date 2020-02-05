@@ -94,10 +94,10 @@ class App extends React.Component {
 			reviewsPerPage: 7,
 		};
 
-		this.handleSearch = this.handleSearch.bind(this);
-    	this.filterReviewsBySearchTerm = this.filterReviewsBySearchTerm.bind(this);
-    	this.backToAllReviews = this.backToAllReviews.bind(this);
-    	this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.filterReviewsBySearchTerm = this.filterReviewsBySearchTerm.bind(this);
+    this.backToAllReviews = this.backToAllReviews.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 	}
 
 	componentDidMount() {
@@ -171,89 +171,86 @@ class App extends React.Component {
 		if(reviews.length === this.state.ratings.length) {
 			return (
 				<div>
-          			<Hr/>
-          			<Block>
-            		<Div1>
-              			<h2><b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}</h2>
-            		</Div1>
-            		<Div2>
-              			<h2>
-                			<ReviewSearch handleSearch={this.handleSearch}/>
-              			</h2>
-            		</Div2>
-          			</Block>
-          			<Hr/>
+          	<Hr/>
+          		<Block>
+            	<Div1>
+              		<h2><b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}</h2>
+            	</Div1>
+            	<Div2>
+              	<h2>
+                	<ReviewSearch handleSearch={this.handleSearch}/>
+              	</h2>
+            	</Div2>
+          		</Block>
+          	<Hr/>
 					<div>
 						{this.state.ratings.length && <Ratings ratings={this.state.ratings}/>}
 					</div>
-          			<div>
-            		{reviews.length && <ReviewList reviews={currentReviews}/>}
-          			</div>
-          			<div>
-            			{renderPageNumber}
-          			</div>
+          <div>
+            {reviews.length && <ReviewList reviews={currentReviews}/>}
+          </div>
+          <div>
+            {renderPageNumber}
+          </div>
 				</div>
 			);
-
     	//2nd case: searched term found in some of the reviews
     	} else if(reviews.length > 0) {
-			return (
-				<div>
-          			<Hr/>
-          			<Block>
-            		<Div1>
-              			<h2>
-                		<b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
-              			</h2>
-            		</Div1>
-
-            		<Div2>
-              			<h2><ReviewSearch handleSearch={this.handleSearch}/></h2>
-            		</Div2>
-          			</Block>
-          			<Hr/>
-          			<div>
-						<P1>{reviews.length} guests have mentioned "<b>{this.state.searchedTerm}</b>"</P1>
-              			<P2>{this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}</P2>
-            		</div>
-          			<div>
-            			{reviews.length && <ReviewList reviews={currentReviews}/>}
-          			</div>
-          			<div>
-            			{renderPageNumber}
-          			</div>
-        		</div>
-      		);
-
-    	//3rd: search term not found in any of the reviews
-    	} else if(reviews.length === 0) {
-			return (
-        		<div>
-          			<Hr/>
-          			<Block>
-            		<Div1>
-              			<h2>
-                		<b>{this.state.ratings.length} Reviews</b>
-                		{this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
-              			</h2>
-            		</Div1>
-            		<Div2>
-              			<h2>
-                		<ReviewSearch handleSearch={this.handleSearch}/>
-              			</h2>
-            		</Div2>
-          		</Block>
-          		<Hr/>
-          		<div>
-            		<P1>None of our guests have mentioned "<b>{this.state.searchedTerm}</b>"</P1>
+			  return (
+  				<div>
+            <Hr/>
+            <Block>
+              <Div1>
+                <h2>
+                  <b>{this.state.ratings.length} Reviews</b> {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
+              	</h2>
+            	</Div1>
+              <Div2>
+              	<h2><ReviewSearch handleSearch={this.handleSearch}/></h2>
+            	</Div2>
+          	</Block>
+            <Hr/>
+            <div>
+              <P1>{reviews.length} guests have mentioned "<b>{this.state.searchedTerm}</b>"</P1>
+              <P2>{this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}</P2>
+            </div>
+          	<div>
+              {reviews.length && <ReviewList reviews={currentReviews}/>}
+            </div>
+            <div>
+              {renderPageNumber}
+          	</div>
+        	  </div>
+          );
+      //3rd: search term not found in any of the reviews
+      } else if(reviews.length === 0) {
+        return (
+          <div>
+            <Hr/>
+            <Block>
+              <Div1>
+                <h2>
+                  <b>{this.state.ratings.length} Reviews</b>
+                  {this.state.ratings.length && <OverallRating ratings={this.state.ratings}/>}
+                  </h2>
+              </Div1>
+            	<Div2>
+                <h2>
+                  <ReviewSearch handleSearch={this.handleSearch}/>
+              	</h2>
+            	</Div2>
+              </Block>
+              <Hr/>
+              <div>
+                <P1>None of our guests have mentioned "<b>{this.state.searchedTerm}</b>"</P1>
             		<P2>
               		{this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}
             		</P2>
           		</div>
         		</div>
-      		);
+      	);
     	}
-  	}
+  }
 }
 
 export default App;
