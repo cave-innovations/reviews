@@ -9,7 +9,7 @@ const Hr = styled.hr `
   height: 1px;
 `;
 const Rating1 = styled.div `
-  float:left
+  float:left;
 `;
 
 const Rating2 = styled.div `

@@ -14,7 +14,7 @@ const Div2 = styled.div `
 const Image = styled.img `
   height: 50px;
   width: 50px;
-  border-radius:50%
+  border-radius: 50%;
 `;
 
 const Hr = styled.hr `
@@ -24,13 +24,13 @@ color: #eee;
 height: 1px;
 `;
 const U = styled.span `
-  color: rgb(0, 132, 137)
+  color: rgb(0, 132, 137);
 `;
 const More = styled.span `
   &:hover {
     cursor: pointer;
     text-decoration: underline;
-  }
+  };
 `;
 
 class Review extends React.Component {

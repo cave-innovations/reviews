@@ -4,13 +4,10 @@ const _ = require('lodash');
 
 
 const Star1 = styled.span `
-  color: rgb(0, 132, 137)
+  color: rgb(0, 132, 137);
 `;
 const Star2 = styled.span `
-  color: lightgrey
-`;
-
-const StarHalf = styled.span `
+  color: lightgrey;
 `;
 
 const Key = styled.span `
