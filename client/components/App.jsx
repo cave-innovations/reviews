@@ -42,16 +42,16 @@ const U = styled.span `
   color: lightseagreen;
   &:hover {
     cursor: pointer;
-    text-decoration: underline
-  }
+    text-decoration: underline;
+  };
 `;
 
 const P1 = styled.p `
-  float:left
+  float:left;
 `;
 
 const P2 = styled.p `
-  float:right
+  float:right;
 `;
 
 const Page = styled.span `
@@ -61,7 +61,7 @@ const Page = styled.span `
   &:hover {
     cursor: pointer;
     text-decoration: underline;
-  }
+  };
 `;
 
 const CurrentPage = styled.span `
