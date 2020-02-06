@@ -9,41 +9,38 @@ const Star2 = styled.span `
 `;
 
 const OverallRating = (props) => {
-    const overallRatings = [];
-    const accuracy = props.ratings.map(a => a.Rating_Accuracy).reduce((a, b) => a + b) / props.ratings.length;
-    const checkin = props.ratings.map(a => a.Rating_CheckIn).reduce((a, b) => a + b) / props.ratings.length;
-    const cleanliness = props.ratings.map(a => a.Rating_Cleanliness).reduce((a, b) => a + b) / props.ratings.length;
-    const communication = props.ratings.map(a => a.Rating_Communication).reduce((a, b) => a + b) / props.ratings.length;
-    const location = props.ratings.map(a => a.Rating_Location).reduce((a, b) => a + b) / props.ratings.length;
-    const value = props.ratings.map(a => a.Rating_Value).reduce((a, b) => a + b) / props.ratings.length;
-    overallRatings.push(accuracy, checkin, cleanliness, communication, location, value);
-    const averageRating = Math.floor(overallRatings.reduce((a, b) => a + b) / overallRatings.length);
+    var sum = 0;
 
-    if (averageRating === 1) {
+    props.ratings.forEach(a => sum += (a.Rating_Accuracy + a.Rating_CheckIn + a.Rating_Cleanliness + a.Rating_Communication + a.Rating_Location + a.Rating_Value));
+
+    //average rating
+    var rating = Math.floor(sum/(props.ratings.length * 6));
+
+    if (rating === 1) {
         return (
             <span>
                 <Star1>★</Star1><Star2>★</Star2><Star2>★</Star2><Star2>★</Star2><Star2>★</Star2>
             </span>
         );
-    } else if (averageRating === 2) {
+    } else if (rating === 2) {
         return (
             <span>
                 <Star1>★</Star1><Star1>★</Star1><Star2>★</Star2><Star2>★</Star2><Star2>★</Star2>
             </span>
         );
-    } else if (averageRating === 3) {
+    } else if (rating === 3) {
         return (
             <span>
                 <Star1>★</Star1><Star1>★</Star1><Star1>★</Star1><Star2>★</Star2><Star2>★</Star2>
             </span>
     );
-    } else if (averageRating === 4) {
+    } else if (rating === 4) {
         return (
             <span>
                 <Star1>★</Star1><Star1>★</Star1><Star1>★</Star1><Star1>★</Star1><Star2>★</Star2>
             </span>
         );
-    } else if (averageRating === 5) {
+    } else if (rating === 5) {
         return (
             <span>
                 <Star1>★</Star1><Star1>★</Star1><Star1>★</Star1><Star1>★</Star1><Star1>★</Star1>
