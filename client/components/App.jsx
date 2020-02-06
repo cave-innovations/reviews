@@ -8,77 +8,7 @@ import ReviewSearch from './ReviewSearch.jsx';
 import OverallRating from './OverallRating.jsx';
 
 //styling using styled-components
-const Title = styled.h1`
-    font-size: 1.5em;
-    text-align: center;
-    color: palevioletred;
-`;
-const Wrapper = styled.section`
-    padding: 4em;
-    background: papayawhip;
-`;
-
-const Hr = styled.hr`
-    background-color: #eee;
-    border: 0 none;
-    color: #eee;
-    height: 1px;
-`;
-
-const Block = styled.div`
-    display: block;
-    clear: both;
-`;
-
-const Div1 = styled.div`
-    display:inline-block;
-`;
-const Div2 = styled.div`
-    display:inline-block;
-    float: right;
-`;
-
-const U = styled.span`
-    color: lightseagreen;
-    &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    };
-`;
-
-const P1 = styled.p`
-    float:left;
-`;
-
-const P2 = styled.p`
-    float:right;
-`;
-
-const Page = styled.span`
-    margin-right: 1em;
-    font-size: 20px;
-    color: rgb(0, 132, 137);
-    &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    };
-`;
-
-const CurrentPage = styled.span`
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-    border-radius: 10px;
-    margin-right: 1em;
-    text-align: center;
-    font-size: 20px;
-    background-color: rgb(0, 132, 137);
-    color: white;
-    &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    };
-`;
+import {Title, Wrapper, Hr, Block, Div1, Div2, U, P1, P2, Page, CurrentPage} from './Style.jsx';
 
 class App extends React.Component {
     constructor(props) {
