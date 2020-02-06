@@ -11,10 +11,10 @@ const Star2 = styled.span `
 `;
 
 const Key = styled.span `
-    // padding-right: 50px;
+    padding-right: 50px;
 `;
 const Stars = styled.span `
-    // padding-left: 50px;
+    padding-left: 50px;
 `;
 
 const Rating = (props) => {
