@@ -2,7 +2,9 @@
 
 > Cave Innovations
 
-![Alt text](Frontend Architecture.png?raw=true "Optional Title")
+<div>
+    <img src="Frontend Architecture.png" width="400px"></img>
+</div>
 
 ## Related Projects
 
