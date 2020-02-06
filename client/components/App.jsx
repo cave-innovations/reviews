@@ -7,7 +7,7 @@ import Ratings from './Ratings.jsx';
 import ReviewSearch from './ReviewSearch.jsx';
 import OverallRating from './OverallRating.jsx';
 
-// styling using styled-components
+//styling using styled-components
 const Title = styled.h1`
     font-size: 1.5em;
     text-align: center;
@@ -101,12 +101,12 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        // get requests: routes /listing and /review are used to get listing and listing reviews data respectively
+        //get requests: routes /listing and /review are used to get listing and listing reviews data respectively
         axios.all([
             axios.get('api/listing', { params: { listingId: this.state.listingId } }),
             axios.get('api/review', { params: { listingId: this.state.listingId } }),
         ])
-        // both requests are now complete: spread is used to hangle multiple concurrent requests
+        //both requests are now complete: spread is used to hangle multiple concurrent requests
         .then(axios.spread((listing, reviews) => {
             this.setState({
                 listing: listing.data,
@@ -117,23 +117,23 @@ class App extends React.Component {
         .catch((error) => console.log(error));
     }
 
-    // function to search for key word in reviews
+    //function to search for key word in reviews
     handleSearch(searchedTerm) {
         this.setState({ searchedTerm });
     }
 
-    // function to filter the reviews on the searched term
+    //function to filter the reviews on the searched term
     filterReviewsBySearchTerm() {
         return this.state.searchedTerm ? this.state.reviews.filter((review) => review.Review.includes(this.state.searchedTerm)) : this.state.reviews;
     }
 
-    // function to return to all reviews: essentially resetting searched term to empy string
+    //function to return to all reviews: essentially resetting searched term to empy string
     backToAllReviews(event) {
         event.preventDefault();
         this.setState({ searchedTerm: '' });
     }
 
-    // function to implement pagination, helps to move across different pages
+    //function to implement pagination, helps to move across different pages
     handleClick(event) {
         window.scrollTo(0, 0);// scrolls to the top of page
         this.setState({ currentPage: Number(event.target.id) });
@@ -145,22 +145,22 @@ class App extends React.Component {
         const reviews = this.filterReviewsBySearchTerm();
         const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
-        // array to store the number of total pages based on number of reviews and reviews per pages
+        //array to store the number of total pages based on number of reviews and reviews per pages
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(reviews.length / this.state.reviewsPerPage); i++) {
             pageNumbers.push(i);
         }
 
-        // page number component: current page has a slight different styling than other pages to note the difference
+        //page number component: current page has a slight different styling than other pages to note the difference
         const renderPageNumber = pageNumbers.map((number) => (
             number === this.state.currentPage?
             (<CurrentPage key={number} id={number} onClick={this.handleClick}>{number}</CurrentPage>) :
             (<Page key={number} id={number} onClick={this.handleClick}>{number}</Page>)
         ));
 
-        // conditional rendering:
+        //conditional rendering:
 
-        // 1st case: no searched term
+        //1st case: no searched term
         if (reviews.length === this.state.ratings.length) {
             return (
                 <div>
@@ -189,83 +189,65 @@ class App extends React.Component {
                     </div>
                 </div>
             );
-        // 2nd case: searched term found in some of the reviews
-    	} if (reviews.length > 0) {
-			  return (
-  				<div>
-    <Hr />
-    <Block>
-  <Div1>
-  <h2>
-								<b>
-      {this.state.ratings.length}
-      {' '}
-      Reviews
-								</b>
-								{' '}
-								{this.state.ratings.length && <OverallRating ratings={this.state.ratings} />}
-							</h2>
-						</Div1>
-  <Div2>
-  <h2><ReviewSearch handleSearch={this.handleSearch} /></h2>
-</Div2>
-</Block>
-    <Hr />
-    <div>
-  <P1>
-							{reviews.length}
-  {' '}
-  guests have mentioned "
-							<b>{this.state.searchedTerm}</b>
-  "
-						</P1>
-						<P2>{this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}</P2>
-     </div>
-    <div>
-						{reviews.length && <ReviewList reviews={currentReviews} />}
-</div>
-    <div>
-  {renderPageNumber}
-     </div>
-  </div>
-			);
-			// 3rd: search term not found in any of the reviews
-		} if (reviews.length === 0) {
-			return (
-  <div>
-					<Hr />
-					<Block>
-						<Div1>
-    <h2>
-  <b>
-  {this.state.ratings.length}
-  {' '}
-  Reviews
-								</b>
-								{this.state.ratings.length && <OverallRating ratings={this.state.ratings} />}
-							</h2>
-  </Div1>
-						<Div2>
-							<h2>
-								<ReviewSearch handleSearch={this.handleSearch} />
-        </h2>
-						</Div2>
-    </Block>
-  <Hr />
-  <div>
-  <P1>
-  None of our guests have mentioned "
-							<b>{this.state.searchedTerm}</b>
-  "
-						</P1>
-  <P2>
-  {this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}
-						</P2>
-					</div>
-				</div>
-			);
-		}
-	}
+
+        //2nd case: searched term found in some of the reviews
+        } if (reviews.length > 0) {
+            return (
+                <div>
+                    <Hr />
+                    <Block>
+                        <Div1>
+                            <h2>
+                                <b>{this.state.ratings.length}{' '}Reviews</b>{' '}{this.state.ratings.length && <OverallRating ratings={this.state.ratings} />}
+                            </h2>
+                        </Div1>
+                        <Div2>
+                            <h2><ReviewSearch handleSearch={this.handleSearch} /></h2>
+                        </Div2>
+                    </Block>
+                    <Hr />
+                    <div>
+                        <P1>
+                            {reviews.length}{' '}guests have mentioned "<b>{this.state.searchedTerm}</b>"
+                        </P1>
+                        <P2>{this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}</P2>
+                    </div>
+                    <div>
+                        {reviews.length && <ReviewList reviews={currentReviews} />}
+                    </div>
+                    <div>
+                        {renderPageNumber}
+                    </div>
+                </div>
+            );
+        //3rd case: search term not found in any of the reviews
+        } if (reviews.length === 0) {
+            return (
+                <div>
+                    <Hr />
+                    <Block>
+                        <Div1>
+                            <h2><b>{this.state.ratings.length}{' '}Reviews</b>{this.state.ratings.length && <OverallRating ratings={this.state.ratings} />}
+                            </h2>
+                        </Div1>
+                        <Div2>
+                            <h2>
+                                <ReviewSearch handleSearch={this.handleSearch} />
+                            </h2>
+                        </Div2>
+                    </Block>
+                    <Hr />
+                    <div>
+                        <P1>None of our guests have mentioned "<b>{this.state.searchedTerm}</b>"
+                        </P1>
+                        <P2>
+                            {this.state.searchedTerm && <a onClick={this.backToAllReviews}><U>Back to all reviews</U></a>}
+                        </P2>
+                    </div>
+                </div>
+            );
+        }
+    }
 }
 
 export default App;
