@@ -39,10 +39,10 @@ const Ratings = (props) => {
     return (
         <Block>
             <Rating1>
-                {ratings1.map((rating, i) => <Rating key={i} rating={rating}/>);}
+                {ratings1.map((rating, i) => <Rating key={i} rating={rating}/>)}
             </Rating1>
             <Rating2>
-                {ratings2.map((rating, i) => <Rating key={i} rating={rating}/>);}
+                {ratings2.map((rating, i) => <Rating key={i} rating={rating}/>)}
             </Rating2>
         </Block>
     );
