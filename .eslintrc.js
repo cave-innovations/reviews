@@ -1,14 +1,29 @@
-/**
- * These rules enforce the Hack Reactor Style Guide
- *
- * Visit this repo for more information:
- *   https://github.com/reactorcore/eslint-config-hackreactor
- */
-
 module.exports = {
-    extends: './node_modules/eslint-config-hackreactor/index.js'
-    // rules: {
-    //     // Rules here will override the 'hackreactor' configuration
-    //     // http://eslint.org/docs/rules/
-    // }
-  };
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+  },
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+  ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  plugins: [
+    'react',
+  ],
+  rules: {
+    "indent": [2, "tab"],
+    "no-tabs": 0
+  },
+};

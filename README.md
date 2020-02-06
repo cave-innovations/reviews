@@ -1,6 +1,8 @@
 # Project Name
 
-> Project description
+> Cave Innovations
+
+![Alt text](Frontend Architecture.png?raw=true "Optional Title")
 
 ## Related Projects
 

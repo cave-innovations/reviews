@@ -11,6 +11,7 @@
     "build": "npx webpack --watch",
     "start": "node server/server.js",
     "test": "jest --coverage",
+    "lint": "eslint /Volumes/easystore/hrsf/reviews/client/components/App.jsx",
     "seed": "node server/seeding.js"
   },
   "dependencies": {
@@ -47,9 +48,13 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.4.0",
-    "eslint": "^6.2.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
-    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
     "jest": "^24.9.0",
     "react-test-renderer": "^16.9.0",
     "supertest": "^4.0.2",
