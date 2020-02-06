@@ -1,6 +1,6 @@
-# Project Name
+# Cave Innovations
 
-> Cave Innovations
+> Reviews and Ratings
 
 <div>
     <img src="Frontend Architecture.png" width="400px"></img>
